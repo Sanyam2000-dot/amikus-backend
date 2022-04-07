@@ -3,21 +3,12 @@ const mongoose = require("mongoose");
 var cors = require("cors");
 
 const app = express();
-app.use(
-    cors({
-        origin: true,
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
-);
-app.options(
-    '*',
-    cors({
-        origin: true,
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
-);
+var corsOptions = {
+    origin: "https://amikus.netlify.app",
+    optionsSuccessStatus: 200,
+    // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 const port = 3000;
 
 const DB =
