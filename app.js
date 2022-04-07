@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 var cors = require("cors");
+var process = require("process");
 
 const app = express();
 // var corsOptions = {
@@ -24,7 +25,9 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 app.use(allowCrossDomain);
-const port = 3000;
+const server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
+
+const server_host = process.env.YOUR_HOST || "0.0.0.0";
 
 const DB =
     "mongodb+srv://sanyam:sanyam@cluster0.pvopp.mongodb.net/new?retryWrites=true&w=majority";
@@ -40,6 +43,9 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use(require("./router/auth"));
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(server_port, server_host, () => {
+    console.log("Listening on port %d", server_port);
 });
+
+//   Start server.
+console.log(`Server is listening on port ${server_port}`);
