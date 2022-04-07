@@ -3,7 +3,21 @@ const mongoose = require("mongoose");
 var cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        origin: true,
+        optionsSuccessStatus: 200,
+        credentials: true,
+    })
+);
+app.options(
+    '*',
+    cors({
+        origin: true,
+        optionsSuccessStatus: 200,
+        credentials: true,
+    })
+);
 const port = 3000;
 
 const DB =
