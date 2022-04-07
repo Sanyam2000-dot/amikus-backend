@@ -13,6 +13,17 @@ app.use(
         origin: "*",
     })
 );
+
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://amikus.netlify.app");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+
+    next();
+};
+
+app.use(allowCrossDomain);
 const port = 3000;
 
 const DB =
